@@ -18,5 +18,5 @@ using namespace pros;
 
 void autonomous() {
   Robot *robot = new Robot();
-  robot->update();
+  robot->Update();
 }

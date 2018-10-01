@@ -1,26 +1,33 @@
-#include "drive.h"
+#include "Drive.h"
 
 Drive::Drive()
 {
   leftMotor = new Motor(1);
   rightMotor = new Motor(2);
-  drivingForward = false;
+  task = FORWARD;
+  counter = new Counter();
 }
 
-void Drive::update()
+void Drive::Update()
 {
-  // Bara til að prófa
-  if (drivingForward)
-  {
-    if (time <= 0) drivingForward = false;
-    leftMotor->move_velocity(speed);
-    rightMotor->move_velocity(speed);
+  counter->Update();
+
+  switch (task) {
+    case STOP: break;
+    case FORWARD:
+    {
+      if (counter->Done()) task = STOP;
+      leftMotor->move_velocity(leftMotorSpeed);
+      rightMotor->move_velocity(rightMotorSpeed);
+      break;
+    }
   }
 }
 
-void Drive::forward(int time, int speed)
+void Drive::Forward(int time, int speed)
 {
-  drivingForward = true;
-  this->time = time;
-  this->speed = speed;
+  counter->Start(time);
+  leftMotorSpeed = speed;
+  rightMotorSpeed = speed;
+  task = FORWARD;
 }

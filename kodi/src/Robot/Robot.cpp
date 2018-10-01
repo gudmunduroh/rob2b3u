@@ -5,7 +5,7 @@ Robot::Robot()
   drive = new Drive();
 }
 
-void Robot::update()
+void Robot::Update()
 {
-  drive->update();
+  drive->Update();
 }

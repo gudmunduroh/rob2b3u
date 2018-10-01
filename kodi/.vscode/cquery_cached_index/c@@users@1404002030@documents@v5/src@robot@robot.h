@@ -8,5 +8,5 @@ public:
   Drive *drive;
 
   Robot();
-  void update();
+  void Update();
 };

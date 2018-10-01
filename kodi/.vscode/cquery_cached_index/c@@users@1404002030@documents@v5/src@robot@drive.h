@@ -1,16 +1,23 @@
 #include "main.h"
+#include "Counter.h"
 
 using namespace pros;
+
+enum DrivingTask {
+  STOP,
+  FORWARD
+};
 
 class Drive {
 private:
   Motor *leftMotor;
   Motor *rightMotor;
-  bool drivingForward; // --
-  int speed; // --
-  int time; // --
+  DrivingTask task;
+  int rightMotorSpeed;
+  int leftMotorSpeed;
+  Counter *counter;
 public:
   Drive();
-  void update();
-  void forward(int time, int speed = 200);
+  void Update();
+  void Forward(int time, int speed = 200);
 };
