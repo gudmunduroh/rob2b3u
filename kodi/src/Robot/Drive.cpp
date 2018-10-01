@@ -4,7 +4,7 @@ Drive::Drive()
 {
   leftMotor = new Motor(1);
   rightMotor = new Motor(2);
-  task = FORWARD;
+  task = STOP;
   counter = new Counter();
 }
 
