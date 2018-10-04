@@ -10,8 +10,10 @@ enum DrivingTask {
 
 class Drive {
 private:
-  Motor *leftMotor;
-  Motor *rightMotor;
+  Motor *leftFrontMotor;
+  Motor *leftBackMotor;
+  Motor *rightFrontMotor;
+  Motor *rightBackMotor;
   DrivingTask task;
   int rightMotorSpeed;
   int leftMotorSpeed;
