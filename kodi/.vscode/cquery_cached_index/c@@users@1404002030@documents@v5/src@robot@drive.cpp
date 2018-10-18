@@ -6,7 +6,7 @@ Drive::Drive()
   leftBackMotor = new Motor(2);
   rightFrontMotor = new Motor(3);
   rightBackMotor = new Motor(4);
-  task = FORWARD;
+  task = DrivingTask::STOP;
   counter = new Counter();
 }
 
@@ -15,16 +15,16 @@ void Drive::Update()
   counter->Update();
 
   switch (task) {
-    case STOP:
+    case DrivingTask::STOP:
     {
       if (!leftFrontMotor->is_stopped()) leftFrontMotor->move_velocity(0);
       if (!leftBackMotor->is_stopped()) leftBackMotor->move_velocity(0);
       if (!rightFrontMotor->is_stopped()) rightFrontMotor->move_velocity(0);
       if (!rightBackMotor->is_stopped()) rightBackMotor->move_velocity(0);
     }
-    case FORWARD:
+    case DrivingTask::MOVING:
     {
-      if (counter->Done()) task = STOP;
+      if (counter->Done()) task = DrivingTask::STOP;
       leftFrontMotor->move_velocity(leftMotorSpeed);
       leftBackMotor->move_velocity(leftMotorSpeed);
       rightFrontMotor->move_velocity(rightMotorSpeed);
@@ -37,7 +37,12 @@ void Drive::Update()
 void Drive::Forward(int time, int speed)
 {
   counter->Start(time);
-  leftMotorSpeed = speed;
+  this->speed = speed;
+  task = MOVING;
+}
+
+void Drive::CalcMotorSpeed()
+{
   rightMotorSpeed = speed;
-  task = FORWARD;
+  leftMotorSpeed = speed;
 }

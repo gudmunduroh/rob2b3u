@@ -15,8 +15,25 @@
 
 using namespace pros;
 
+static Robot *robot;
+
+
+void update()
+{
+  
+}
+
+
+
+void core()
+{
+  robot->Update();
+}
 
 void autonomous() {
-  Robot *robot = new Robot();
-  robot->Update();
+   robot = new Robot();
+  while (true)
+  {
+    core();
+  }
 }
